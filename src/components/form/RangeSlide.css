@@ -1,0 +1,19 @@
+.noUi-horizontal {
+  @apply bg-transparent border-none rounded-none shadow-none;
+}
+
+.noUi-base, .noUi-connects {
+  @apply h-1.5 bg-gray-400 rounded;
+}
+
+.noUi-connect {
+  @apply bg-primary-500;
+}
+
+.noUi-horizontal .noUi-handle {
+  @apply w-4 h-4 -right-2 rounded-full shadow-none border-none bg-primary-500 cursor-pointer;
+}
+
+.noUi-handle:before, .noUi-handle:after {
+  content: none;
+}

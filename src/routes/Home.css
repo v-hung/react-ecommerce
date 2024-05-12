@@ -1,0 +1,24 @@
+.home-slide swiper-container {
+  --swiper-navigation-color: #333;
+  --swiper-pagination-color: #333;
+  --swiper-navigation-size: 24px;
+
+  @apply h-96 md:h-[27rem] lg:h-[30rem];
+
+  & swiper-slide .slide-popup {
+    @apply translate-y-7 opacity-0 transition-all duration-1000;
+  }
+
+  & swiper-slide.swiper-slide-active .slide-popup {
+    @apply translate-y-0 opacity-100;
+  }
+}
+
+.product-slide {
+  --swiper-navigation-color: #333;
+  --swiper-pagination-color: #333;
+  --swiper-navigation-size: 24px;
+
+  --swiper-navigation-top-offset: 35%;
+  --swiper-navigation-sides-offset: -10px;
+}

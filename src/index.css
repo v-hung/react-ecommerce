@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
+
+  body {
+    /* font-family: "Poppins", sans-serif; */
+    color: #333;
+  }
+
+  .icon {
+    font-family: 'Material Symbols Rounded';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+
+  .icon.icon-200 {
+    font-variation-settings:
+    'wght' 200
+  }
+
+  .icon.icon-300 {
+    font-variation-settings:
+    'wght' 300
+  }
+
+  [type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
+    @apply bg-transparent border-gray-300 text-sm p-2.5 !pr-6;
+  }
+}
+
+@layer components {
+  .link {
+    @apply hover:text-primary-600 cursor-pointer;
+  }
+
+  .link.disabled {
+    @apply pointer-events-none text-gray-500;
+  }
+}
