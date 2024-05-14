@@ -1,10 +1,42 @@
 import { useEffect, useState } from "react"
 
-export const Fetch = async<T = any>(url: RequestInfo | URL, options?: RequestInit) : Promise<T | null> => {
+const cache: {
+  [key: string]: {
+    expiry: number,
+    data: any
+  }
+} = {}
+
+type OptionsType = {
+  cache: boolean,
+  time: number
+}
+
+export const Fetch = async<T = any>(url: RequestInfo | URL, options?: RequestInit, optionsType?: OptionsType) : Promise<T | null> => {
   const csrf = (document.head.querySelector("[name~=csrf-token][content]") as HTMLMetaElement)?.content || ''
   // const accessToken = useUserStore.getState().accessToken
+
+  const finalOptionsType: OptionsType = optionsType || { 
+    cache: false, 
+    time: 180000, // 5 minutes
+  }
+
+  const cacheKey = typeof url === 'string' ? url : url.toString();
   
   try {
+    let data = null
+
+    if ( finalOptionsType.cache && cache[cacheKey] )  {
+      const cachedEntry = cache[cacheKey]
+
+      if (Date.now() > cachedEntry.expiry + finalOptionsType.time) {
+        return cachedEntry.data
+      }
+      else {
+        delete cache[cacheKey]
+      }
+    }
+
     const response = await fetch(url, {
       ...options,
       headers: {
@@ -19,7 +51,15 @@ export const Fetch = async<T = any>(url: RequestInfo | URL, options?: RequestIni
       throw response
     }
 
-    const data = await response.json()
+    if (finalOptionsType.cache) {
+      cache[cacheKey] = {
+        data,
+        expiry: Date.now()
+      };
+    }
+
+    data = await response.json()
+    
     return data as T
   } catch (error) {
     console.error('Error fetching data:', error)

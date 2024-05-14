@@ -16,9 +16,9 @@ type State = HTMLAttributes<HTMLDivElement> & {
 const PageHeader: FC<State> = (props) => {
   const { className, title, breadcrumbs, ...rest } = props
   return (
-    <div {...rest} className={twMerge('py-12', className)}>
+    <div {...rest} className={twMerge('py-6 md:py-12', className)}>
       <Container className='flex flex-col items-center'>
-        <Breadcrumb aria-label="Default breadcrumb example">
+        <Breadcrumb>
           <Breadcrumb.Item icon={HiHome}>
             <Link to={"/"}>Trang chủ</Link>
           </Breadcrumb.Item>

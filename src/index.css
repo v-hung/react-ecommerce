@@ -10,39 +10,28 @@
     color: #333;
   }
 
-  .icon {
-    font-family: 'Material Symbols Rounded';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    -webkit-font-feature-settings: 'liga';
-    -webkit-font-smoothing: antialiased;
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
-  }
-
-  .icon.icon-200 {
-    font-variation-settings:
-    'wght' 200
-  }
-
-  .icon.icon-300 {
-    font-variation-settings:
-    'wght' 300
-  }
-
   [type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
     @apply bg-transparent border-gray-300 text-sm p-2.5 !pr-6;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"][type=number] {
+    -moz-appearance: textfield;
+  }
+
+  svg {
+    @apply !fill-current;
+  }
+
+  .ql-align-center img {
+    @apply mx-auto;
   }
 }
 
@@ -53,5 +42,12 @@
 
   .link.disabled {
     @apply pointer-events-none text-gray-500;
+  }
+
+  .icon {
+    @apply block w-6 h-6;
+  }
+  .icon svg{
+    @apply !w-full !h-full;
   }
 }

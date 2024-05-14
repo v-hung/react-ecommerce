@@ -17,7 +17,8 @@ type KebabObjectKeys<T> = {
 
 type SwiperPropsCustom = Omit<KebabObjectKeys<SwiperProps>, "breakpoints" | "navigation"> & {
   breakpoints?: string | SwiperProps["breakpoints"]
-  navigation?: string | SwiperProps["navigation"]
+  navigation?: string | SwiperProps["navigation"],
+  autoplay?: string | SwiperProps["autoplay"]
 }
 
 declare global {

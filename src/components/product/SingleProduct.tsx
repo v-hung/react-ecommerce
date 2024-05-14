@@ -1,5 +1,6 @@
 import { Button, Rating, RatingProps } from 'flowbite-react'
 import { FC, HTMLAttributes, useState } from 'react'
+import { FaExternalLinkAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { twMerge } from 'tailwind-merge'
 
@@ -35,8 +36,8 @@ const SingleProduct: FC<State> = (props) => {
           <Button color={isHover ? "dark" : "gray"} size={"sm"} className='rounded-none relative z-10'>
             <span className='text-xs -mx-3 px-1 sm:text-sm sm:mx-0 sm:px-0'>Thêm vào giỏ hàng</span>
           </Button>
-          <Button color={"gray"} size={"xs"} className='hidden lg:flex absolute right-0 h-full opacity-0 rounded-none group-hover/action:opacity-100 group-hover/action:translate-x-full transition-all'>
-            <span className="icon">pageview</span>
+          <Button color={"gray"} size={"xs"} className='hidden lg:block absolute right-0 h-full opacity-0 rounded-none group-hover/action:opacity-100 group-hover/action:translate-x-full transition-all'>
+            <FaExternalLinkAlt />
           </Button>
         </div>
       </div>

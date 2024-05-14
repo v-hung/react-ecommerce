@@ -20,7 +20,7 @@ const Footer: FC<State> = (props) => {
             <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
               <div className='mb-4'>
                 <div className="flex space-x-3">
-                  <img src={logo} alt={title} className='h-8' />
+                  <img src={logo} alt={title} className='h-8' loading='lazy' />
                   <Link to={"/"} className='self-center whitespace-nowrap text-2xl font-semibold text-gray-300'>{title}</Link>
                 </div>
               </div>

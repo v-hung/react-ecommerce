@@ -37,7 +37,7 @@ const ImageZoom: FC<State> = (props) => {
       onMouseLeave={offZoom}
       {...rest} className={twMerge('overflow-hidden', className)}
     >
-      <img ref={imgEl} src={src} className='w-full h-full transition-transform' />
+      <img ref={imgEl} src={src} className='w-full h-full transition-transform' loading='lazy' />
     </div>
   )
 }

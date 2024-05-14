@@ -1,0 +1,13 @@
+swiper-container {
+  --swiper-navigation-color: #333;
+  --swiper-pagination-color: #333;
+  --swiper-navigation-size: 24px;
+}
+
+.product-thumbs swiper-slide {
+  @apply border-2 border-transparent;
+}
+
+.product-thumbs .swiper-slide-thumb-active {
+  @apply border-primary-500;
+}
