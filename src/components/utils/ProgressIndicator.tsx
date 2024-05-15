@@ -52,12 +52,9 @@ const ProgressIndicator = () => {
   }, [state])
 
   return (
-    <>
-      <Outlet />
-      <div className="fixed w-full h-0.5 top-0 left-0 z-50">
-        <div ref={lineProcess} className="absolute w-0 h-full bg-orange-600 ease-in-out"></div>
-      </div>
-    </>
+    <div className="fixed w-full h-0.5 top-0 left-0 z-50">
+    <div ref={lineProcess} className="absolute w-0 h-full bg-orange-600 ease-in-out"></div>
+    </div>
   )
 }
 

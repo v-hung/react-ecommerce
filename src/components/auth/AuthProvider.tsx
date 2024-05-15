@@ -6,7 +6,7 @@ const AuthProvider = () => {
   const { pathname } = useLocation()
 
   if (!user) {
-    return <Navigate to={`/auth/login${pathname != '/' ? `?redirect_url=${pathname}` : ''}`} />
+    return <Navigate to={`/account/login${pathname != '/' ? `?redirect_url=${pathname}` : ''}`} />
   }
 
   return <Outlet />

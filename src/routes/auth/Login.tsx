@@ -39,9 +39,9 @@ const Login = () => {
   return (
     <>
       <PageHeader title='Đăng nhập' breadcrumbs={[{ title: "Tài khoản của tôi"}]} />
-      <section className='bg-white pt-6 pb-12'>
+      <section className='bg-white pb-12'>
         <Container className='flex justify-center'>
-          <form className="flex w-full max-w-md flex-col gap-4" onSubmit={submit} method='post'>
+          <form className="flex w-full max-w-md flex-col gap-4 border p-6 rounded shadow" onSubmit={submit} method='post'>
             <h6 className='font-bold text-xl'>Đăng nhập</h6>
             <div>
               <div className="mb-2 block">
@@ -55,13 +55,7 @@ const Login = () => {
                 <Label htmlFor="password" value="Mật khẩu" />
                 <span className="text-red-500">*</span>
               </div>
-              <TextInput id="password" name="password" type="password" required 
-                helperText={
-                  <>
-                    Mật khẩu phải bao gồm chữ in (A-Z), chữ thường (a-z), số (0-9) và ký tự đặc biệt
-                  </>
-                }
-              />
+              <TextInput id="password" name="password" type="password" required />
             </div>
             <div className="flex items-center gap-2">
               <Checkbox id="remember" name="remember" />

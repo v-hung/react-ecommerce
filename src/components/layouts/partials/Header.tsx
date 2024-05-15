@@ -35,7 +35,7 @@ const Header: FC<State> = (props) => {
 
               { user
                 ? <Dropdown label="" 
-                    renderTrigger={() => <a href='#' className='ml-2'><Avatar rounded /></a>}
+                    renderTrigger={() => <div className='ml-2 cursor-pointer'><Avatar rounded /></div>}
                     placement='bottom-end'
                   >
                     <Dropdown.Header>
@@ -64,7 +64,7 @@ const Header: FC<State> = (props) => {
               {/* <Navbar.Link as={Link} to="/">Trang chủ</Navbar.Link> */}
               <Navbar.Link as={Link} to="/pages/about">Về chúng tôi</Navbar.Link>
               <Navbar.Link as={Link} to="/products">Cửa hàng</Navbar.Link>
-              <Navbar.Link>
+              <Navbar.Link as={'div'}>
                 <MegaMenu.Dropdown toggle={<>Danh mục sản phẩm</>}>
                   <ul className="grid grid-cols-3">
                     <div className="space-y-4 p-4">

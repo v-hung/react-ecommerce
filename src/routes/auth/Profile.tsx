@@ -6,7 +6,9 @@ const loader: NonIndexRouteObject["loader"] = async ({params}) => {
 
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <>
+      d
+    </>
   )
 }
 

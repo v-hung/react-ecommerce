@@ -39,9 +39,9 @@ const Register = () => {
   return (
     <>
       <PageHeader title='Đăng ký' breadcrumbs={[{ title: "Tài khoản của tôi"}]} />
-      <section className='bg-white pt-6 pb-12'>
+      <section className='bg-white'>
         <Container className='flex justify-center'>
-          <form className="flex w-full max-w-md flex-col gap-4" onSubmit={submit} method='post'>
+          <form className="flex w-full max-w-md flex-col gap-4 border p-6 rounded shadow" onSubmit={submit} method='post'>
             <h6 className='font-bold text-xl'>Đăng ký</h6>
             <div>
               <div className="mb-2 block">
