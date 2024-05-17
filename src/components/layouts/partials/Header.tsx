@@ -1,11 +1,11 @@
-import { FC, HTMLAttributes, useEffect, useRef, useState } from 'react'
+import { FC, HTMLAttributes, MouseEvent, useEffect, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Container from '../../Container'
 import { Avatar, Button, Drawer, Dropdown, Kbd, MegaMenu, Modal, Navbar, TextInput } from 'flowbite-react'
 import useWebStore from '../../../stores/web'
 import { createPortal } from 'react-dom'
 import useUserStore from '../../../stores/user'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaBars, FaSearch, FaShoppingCart } from 'react-icons/fa'
 
 type State = HTMLAttributes<HTMLDivElement>
@@ -188,6 +188,14 @@ const HeaderSearch = () => {
 const HeaderCart = () => {
   const [isOpen, setIsOpen] = useState(false)
 
+  const navigate = useNavigate()
+
+  const handelNavigate = (path: string) => {
+    setIsOpen(false)
+
+    navigate(path)
+  }
+
   return (
     <>
       <a href="#" className='px-4 py-2.5 rounded-lg hover:bg-gray-50' onClick={() => setIsOpen(true)}>
@@ -196,7 +204,7 @@ const HeaderCart = () => {
 
       {createPortal(
         <Drawer position='right' open={isOpen} onClose={() => setIsOpen(false)} className='z-50'>
-          <Drawer.Header titleIcon={() => <span className='icon text-base pr-2'>shopping_cart</span>} title="Giỏ hàng" />
+          <Drawer.Header titleIcon={() => <FaShoppingCart className='mr-2' />} title="Giỏ hàng" />
           <Drawer.Items>
             <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">
               Supercharge your hiring by taking advantage of our&nbsp;
@@ -207,8 +215,8 @@ const HeaderCart = () => {
               job board.
             </p>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <Button outline>Giỏ hàng</Button>
-              <Button>Thanh toán</Button>
+              <Button onClick={() => handelNavigate("/cart")} outline>Giỏ hàng</Button>
+              <Button onClick={() => handelNavigate("/checkout")} >Thanh toán</Button>
             </div>
           </Drawer.Items>
         </Drawer>,

@@ -9,7 +9,7 @@ type State = InputHTMLAttributes<HTMLInputElement> & {
 }
 
 const TouchSpin: FC<State> = (props) => {
-  const { parentClassName, value, onChange, min, max, ...rest } = props
+  const { parentClassName, onChange, min, max, ...rest } = props
 
   const inputEl = useRef<HTMLInputElement>(null)
 
@@ -23,7 +23,7 @@ const TouchSpin: FC<State> = (props) => {
     if (min !== undefined && newValue < min) newValue = min;
     if (max !== undefined && newValue > max) newValue = max;
 
-    if (!value) {
+    if (!rest.value) {
       inputEl.current.value = newValue.toString()
     }
 
@@ -36,13 +36,13 @@ const TouchSpin: FC<State> = (props) => {
   }
 
   return (
-    <div className={twMerge('flex border min-h-10 items-stretch text-center', parentClassName)}>
+    <div className={twMerge('inline-flex border min-h-10 items-stretch text-center', parentClassName)}>
       <a href="#" className="w-10 border-r grid place-items-center" onClick={(e) => handelChange(e, -1)}>
         <FaMinus />
       </a>
       <input  type="number" className='w-10 focus:ring-0 border-none !px-2 text-center font-bold !appearance-none' 
         ref={inputEl}
-        {...rest} value={value} onChange={onChange}
+        {...rest} onChange={onChange}
       />
       <a href="#" className="w-10 border-l grid place-items-center" onClick={(e) => handelChange(e, 1)}>
         <FaPlus />

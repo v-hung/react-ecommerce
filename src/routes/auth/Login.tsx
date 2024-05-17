@@ -38,7 +38,7 @@ const Login = () => {
 
   return (
     <>
-      <PageHeader title='Đăng nhập' breadcrumbs={[{ title: "Tài khoản của tôi"}]} />
+      <PageHeader title='Đăng nhập' breadcrumbs={[{ title: "Tài khoản"}]} />
       <section className='bg-white pb-12'>
         <Container className='flex justify-center'>
           <form className="flex w-full max-w-md flex-col gap-4 border p-6 rounded shadow" onSubmit={submit} method='post'>
@@ -48,7 +48,7 @@ const Login = () => {
                 <Label htmlFor="email" value="Tên người dùng hoặc địa chỉ email" /> 
                 <span className="text-red-500">*</span>
               </div>
-              <TextInput id="email" name="email" type="email" placeholder="name@flowbite.com" required />
+              <TextInput id="email" name="email" type="email" placeholder="name@gmail.com" required />
             </div>
             <div>
               <div className="mb-2 block">

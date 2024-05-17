@@ -38,7 +38,7 @@ const Register = () => {
 
   return (
     <>
-      <PageHeader title='Đăng ký' breadcrumbs={[{ title: "Tài khoản của tôi"}]} />
+      <PageHeader title='Đăng ký' breadcrumbs={[{ title: "Tài khoản"}]} />
       <section className='bg-white'>
         <Container className='flex justify-center'>
           <form className="flex w-full max-w-md flex-col gap-4 border p-6 rounded shadow" onSubmit={submit} method='post'>
@@ -48,7 +48,7 @@ const Register = () => {
                 <Label htmlFor="email" value="Tên người dùng hoặc địa chỉ email" /> 
                 <span className="text-red-500">*</span>
               </div>
-              <TextInput id="email" name="email" type="email" placeholder="name@flowbite.com" required />
+              <TextInput id="email" name="email" type="email" placeholder="name@gmail.com" required />
             </div>
 
             <div>
