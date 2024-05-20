@@ -33,7 +33,7 @@ const ShareSocialList: FC<State> = (props) => {
   return (
     <div {...rest} className={twMerge('flex space-x-2', className)}>
       {socials.map((v,i) =>
-        <a href={v.link} key={i} target='_blank' className='svg-icon border-2 rounded-full p-1.5 w-8 h-8 hover:border-primary-500'
+        <a href={v.link} key={i} target='_blank' className='icon border-2 rounded-full p-1.5 w-8 h-8 hover:border-primary-500'
           dangerouslySetInnerHTML={{__html: v.icon}}
         ></a>
       )}

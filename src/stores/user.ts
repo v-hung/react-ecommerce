@@ -4,91 +4,40 @@ import { Fetch } from "../lib/fetch"
 
 export type User = {
   id: number,
-  name: string,
   email: string,
-  avatar: string | null,
-  created_at: Date,
-  updated_at: Date
+  fullName?: string,
+  phoneNumber?: string,
+  emailConfirmed: boolean,
+  address?: string,
+  image?: string,
+  createdAt: Date,
+  updatedAt: Date
 }
 
 type State = {
   user: User | null,
-  accessToken: string | null
+  token: string | null
+  refreshToken: string | null
 }
 
 type Actions = {
-  login: (data: {email: string, password: string, remember: boolean}) => Promise<void>,
-  register: (data: {email: string, password: string, name: string}) => Promise<void>,
   logout: () => void,
   logged: () => Promise<any>,
 }
 
 const useUserStore = create(persist<State & Actions>((set, get) => ({
   user: null,
-  accessToken: null,
+  token: null,
+  refreshToken: null,
 
-  login: async ({ email, password, remember}) => {
-    // const data = await Fetch('/api/auth/login', {
-    //   method: 'post',
-    //   body: JSON.stringify({
-    //     email, password, remember
-    //   })
-    // })
-
-    const data = {
-      user: {
-        id: 1,
-        name: "Việt Hùng",
-        email: "viet.hung.2898@gmail.com"
-      } as User,
-      accessToken: "safddf"
-    }
-
-    await new Promise(res => setTimeout(() => res(1), 1000))
-
-    if (data) {
-      set({
-        user: data.user,
-        accessToken: data.access_token
-      })
-    }
-
-  },
-  register: async ({ email, password, name}) => {
-    const data = await Fetch('/api/auth/register', {
-      method: 'post',
-      body: JSON.stringify({
-        email, password, name
-      })
-    })
-
-    if (data) {
-      set({
-        user: data.user,
-        accessToken: data.access_token
-      })
-    }
-
-  },
   logout: () => {
-    const accessToken = get().accessToken
-    
-    Fetch('/api/auth/logout', {
-      method: 'post',
-      headers: {
-        'Authorization': `Bearer ${accessToken}`
-      }
-    })
-
-    set({ user: null, accessToken: null })
+    set({ user: null, token: null, refreshToken: null })
   },
   logged: async () => {
-    const body = await Fetch('/api/auth/logged', {
-      method: 'post',
-    }).catch(e => null)
+    const [data] = await Fetch('/api/account/current-user')
 
     set({
-      user: body?.user || null
+      user: data?.user || null
     })
 
     return null

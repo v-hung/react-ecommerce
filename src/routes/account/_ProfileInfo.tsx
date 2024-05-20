@@ -2,11 +2,16 @@ import { FileInput, Label, TextInput, Textarea } from 'flowbite-react'
 import { FC, HTMLAttributes } from 'react'
 import { FaUser } from 'react-icons/fa'
 import { twMerge } from 'tailwind-merge'
+import useUserStore from '../../stores/user'
+import { getUserImage } from '../../lib/helper'
 
 type State = HTMLAttributes<HTMLDivElement>
 
 const ProfileInfo: FC<State> = (props) => {
   const { className, ...rest } = props
+
+  const { user } = useUserStore()
+
   return (
     <div {...rest} className={twMerge('mt-4', className)}>
       <div className="flex items-center space-x-2">
@@ -16,7 +21,9 @@ const ProfileInfo: FC<State> = (props) => {
 
       <form action="" className='flex flex-wrap -mx-3 -mb-6 mt-6'>
         <div className='w-full px-3 mb-6 flex items-center space-x-4'>
-          <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-gray-100"></div>
+          <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-gray-100 overflow-hidden">
+            <img src={getUserImage(user)} alt={`photo ${user?.fullName}`} className='w-full h-full object-cover' />
+          </div>
           <FileInput className='inline-flex' required />
         </div>
         <div className='w-full md:w-1/2 px-3 mb-6'>
@@ -24,29 +31,27 @@ const ProfileInfo: FC<State> = (props) => {
             <Label htmlFor="fullName" value="Tên của bạn" /> 
             <span className="text-red-500">*</span>
           </div>
-          <TextInput id="fullName" name="fullName" type="text" required />
+          <TextInput id="fullName" name="fullName" defaultValue={user?.fullName} type="text" required />
         </div>
         <div className='w-full md:w-1/2 px-3 mb-6'>
           <div className="mb-2 block">
             <Label htmlFor="fullName" value="Số điện thoại" /> 
-            <span className="text-red-500">*</span>
           </div>
-          <TextInput required />
+          <TextInput defaultValue={user?.phoneNumber} />
         </div>
         <div className='w-full px-3 mb-6'>
           <div className="mb-2 block">
             <Label htmlFor="fullName" value="Email" /> 
             <span className="text-red-500">*</span>
           </div>
-          <TextInput required />
+          <TextInput required defaultValue={user?.email} disabled />
         </div>
         
         <div className='w-full px-3 mb-6'>
           <div className="mb-2 block">
-            <Label htmlFor="fullName" value="Địa chỉ" /> 
-            <span className="text-red-500">*</span>
+            <Label htmlFor="fullName" value="Địa chỉ" />
           </div>
-          <Textarea />
+          <Textarea defaultValue={user?.address} />
         </div>
 
         <div className='w-full px-3 mb-6'>

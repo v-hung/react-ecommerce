@@ -5,23 +5,24 @@ import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-
 import Container from '../../Container';
 import useWebStore from '../../../stores/web';
 import { Link } from 'react-router-dom';
+import { getImage } from '../../../lib/helper';
 
 type State = HTMLAttributes<HTMLDivElement>
 
 const Footer: FC<State> = (props) => {
   const { className, ...rest } = props
 
-  const { logo, title} = useWebStore()
+  const { store } = useWebStore()
 
   return (
     <div {...rest} className={twMerge('bg-zinc-800', className)}>
       <Container className='py-6'>
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div className='mb-4'>
-            <div className="flex space-x-3">
-              <img src={logo} alt={title} className='h-8' loading='lazy' />
-              <Link to={"/"} className='self-center whitespace-nowrap text-2xl font-semibold text-gray-300'>{title}</Link>
-            </div>
+            <Link to={"/"} className="flex space-x-3">
+              <img src={getImage(store?.image)} alt={store?.title} className='h-8' loading='lazy' />
+              {/* <Link to={"/"} className='self-center whitespace-nowrap text-2xl font-semibold text-gray-300'>{store?.title}</Link> */}
+            </Link>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
             <div>
@@ -49,7 +50,7 @@ const Footer: FC<State> = (props) => {
         </div>
         <FooterTheme.Divider />
         <div className="w-full sm:flex sm:items-center sm:justify-between">
-          <FooterTheme.Copyright href="#" by={title} year={2024} />
+          <FooterTheme.Copyright href="#" by={store?.title ?? ""} year={2024} />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <FooterTheme.Icon href="#" icon={BsFacebook} />
             <FooterTheme.Icon href="#" icon={BsInstagram} />

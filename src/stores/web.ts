@@ -1,18 +1,17 @@
 import { create } from "zustand"
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { Fetch } from "../lib/fetch"
+import { Store } from "../types/store"
 
 type State = {
-  title: string,
-  logo: string
+  store: Store | null
 }
 
 type Actions = {
 }
 
 const useWebStore = create<State & Actions>((set, get) => ({
-  title: "Việt Hùng",
-  logo: "/logo.png"
+  store: null
 }))
 
 export default useWebStore

@@ -1,29 +1,30 @@
-import { Outlet, createBrowserRouter, json } from "react-router-dom";
+import { Outlet, createBrowserRouter } from "react-router-dom";
 import { Home } from "./routes/Home";
 import AuthProvider from "./components/auth/AuthProvider";
-import ProgressIndicator from "./components/utils/ProgressIndicator";
 import MainLayout from "./components/layouts/MainLayout";
-import Login from "./routes/auth/Login";
+import Login from "./routes/account/Login";
 import ProductShop from "./routes/products/ProductShop";
 import ProductDetail from "./routes/products/ProductDetail";
 import Error from "./routes/Error";
 import Error404 from "./routes/Error404";
 import PostList from "./routes/posts/PostList";
 import PostDetail from "./routes/posts/PostDetail";
-import Register from "./routes/auth/Register";
+import Register from "./routes/account/Register";
 import About from "./routes/pages/About";
 import Contact from "./routes/pages/Contact";
 import PageDetail from "./routes/pages/PageDetail";
-import Profile from "./routes/auth/Profile";
+import Profile from "./routes/account/Profile";
 import Cart from "./routes/cart/Cart";
 import Checkout from "./routes/cart/Checkout";
 import Order from "./routes/cart/Order";
 import OrderDetail from "./routes/cart/OrderDetail";
+import useUserStore from "./stores/user";
 
 const router = createBrowserRouter([
   {
     loader: async () => {
       // load logged user
+      await useUserStore.getState().logged()
       return null
     },
     element: <MainLayout />,

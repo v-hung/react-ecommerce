@@ -9,6 +9,7 @@ import TouchSpin from "../../components/form/TouchSpin"
 import { useState } from "react"
 import ShareSocialList from "../../components/utils/ShareSocialList"
 import { BiCommentDetail } from "react-icons/bi"
+import ProductReview from "./_ProductReview"
 
 const loader: NonIndexRouteObject["loader"] = async ({params}) => {
   await new Promise(res => setTimeout(() => res(true), 1000))
@@ -119,13 +120,13 @@ const ProductDetail = () => {
                   <TouchSpin defaultValue={1} parentClassName="h-full" />
                 </div>
                 <div className="px-2 mb-4">
-                  <Button color="dark" size="lg" className="rounded-none">
+                  <Button color="dark"  className="rounded-none">
                     <HiShoppingCart className="mr-2 h-5 w-5" />
                     Thêm vào giỏ hàng
                   </Button>
                 </div>
                 <div className="px-2 mb-4">
-                  <Button color="gray" size="lg" className="rounded-none">
+                  <Button color="gray" className="rounded-none">
                     Xem giỏ hàng
                     <HiOutlineArrowRight className="ml-2 h-5 w-5" />
                   </Button>
@@ -145,7 +146,7 @@ const ProductDetail = () => {
               <div className="prose-sm md:prose-base" dangerouslySetInnerHTML={{ __html: data.content}}></div>
             </Tabs.Item>
             <Tabs.Item title="Bình luận" icon={BiCommentDetail}>
-              Disabled content
+              <ProductReview />
             </Tabs.Item>
           </Tabs>
         </Container>

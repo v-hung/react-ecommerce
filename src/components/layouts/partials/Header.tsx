@@ -7,13 +7,16 @@ import { createPortal } from 'react-dom'
 import useUserStore from '../../../stores/user'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaBars, FaSearch, FaShoppingCart } from 'react-icons/fa'
+import { getImage } from '../../../lib/helper'
+import useProductStore from '../../../stores/product'
 
 type State = HTMLAttributes<HTMLDivElement>
 
 const Header: FC<State> = (props) => {
   const { className, ...rest } = props
 
-  const { logo, title} = useWebStore()
+  const { store } = useWebStore()
+  const { productCategories } = useProductStore()
   const { user, logout } = useUserStore()
 
   return (
@@ -26,8 +29,8 @@ const Header: FC<State> = (props) => {
             </a>
 
             <Navbar.Brand as={Link} to="/" className='!ml-0 !mr-auto lg:!mr-0'>
-              <img alt="" src={logo} className="mr-3 h-6 sm:h-9" loading='lazy' />
-              <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">{title}</span>
+              <img alt="" src={getImage(store?.image)} className="mr-3 h-6 sm:h-9" loading='lazy' />
+              {/* <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">{store?.title}</span> */}
             </Navbar.Brand>
             <div className="order-2 hidden items-center sm:flex">
               <HeaderSearch />
@@ -39,7 +42,7 @@ const Header: FC<State> = (props) => {
                     placement='bottom-end'
                   >
                     <Dropdown.Header>
-                      <span className="block text-sm">{user.name}</span>
+                      <span className="block text-sm">{user.fullName}</span>
                       <span className="block truncate text-sm font-medium">{user.email}</span>
                     </Dropdown.Header>
                     <Dropdown.Item as={Link} to="/profile">Hồ sơ</Dropdown.Item>
@@ -66,63 +69,14 @@ const Header: FC<State> = (props) => {
               <Navbar.Link as={Link} to="/products">Cửa hàng</Navbar.Link>
               <Navbar.Link as={'div'}>
                 <MegaMenu.Dropdown toggle={<>Danh mục sản phẩm</>}>
-                  <ul className="grid grid-cols-3">
-                    <div className="space-y-4 p-4">
-                      <li>
-                        <a href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                          Library
-                        </a>
+                  <ul className="grid grid-cols-3 py-2">
+                    { productCategories.map(v => 
+                      <li key={v.productCategory.id} className='px-4 py-2'>
+                        <Link to={`/products?category=${v.productCategory.slug}`} className="hover:text-primary-600 dark:hover:text-primary-500">
+                          {v.productCategory.title}
+                        </Link>
                       </li>
-                      <li>
-                        <a href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                          Resources
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                          Pro Version
-                        </a>
-                      </li>
-                    </div>
-                    <div className="space-y-4 p-4">
-                      <li>
-                        <a href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                          Contact Us
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                          Support Center
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                          Terms
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                          Blog
-                        </a>
-                      </li>
-                    </div>
-                    <div className="space-y-4 p-4">
-                      <li>
-                        <a href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                          Newsletter
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                          Playground
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                          License
-                        </a>
-                      </li>
-                    </div>
+                    )}
                   </ul>
                 </MegaMenu.Dropdown>
               </Navbar.Link>

@@ -27,7 +27,7 @@
   }
 
   svg {
-    @apply !fill-current;
+    @apply fill-current;
   }
 
   .ql-align-center img {
@@ -48,6 +48,6 @@
     @apply block w-6 h-6;
   }
   .icon svg{
-    @apply !w-full !h-full;
+    @apply !w-full !h-full !fill-current;
   }
 }

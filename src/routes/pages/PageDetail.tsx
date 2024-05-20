@@ -1,4 +1,5 @@
 import { NonIndexRouteObject } from "react-router-dom"
+import Container from "../../components/Container"
 
 const loader: NonIndexRouteObject["loader"] = async ({params}) => {
   return null
@@ -6,7 +7,13 @@ const loader: NonIndexRouteObject["loader"] = async ({params}) => {
 
 const PageDetail = () => {
   return (
-    <div>PageDetail</div>
+    <>
+      <section>
+        <Container className="text-center py-6">
+          <p className="text-primary-600 font-semibold text-xl">Thông tin hóa đơn</p>
+        </Container>
+      </section>
+    </>
   )
 }
 

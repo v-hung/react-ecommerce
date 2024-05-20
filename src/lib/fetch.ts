@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import useUserStore from "../stores/user"
 
 const cache: {
   [key: string]: {
@@ -8,17 +9,17 @@ const cache: {
 } = {}
 
 type OptionsType = {
-  cache: boolean,
-  time: number
+  cache?: boolean,
+  time?: number
 }
 
-export const Fetch = async<T = any>(url: RequestInfo | URL, options?: RequestInit, optionsType?: OptionsType) : Promise<T | null> => {
-  const csrf = (document.head.querySelector("[name~=csrf-token][content]") as HTMLMetaElement)?.content || ''
-  // const accessToken = useUserStore.getState().accessToken
+export const Fetch = async<T = any>(url: RequestInfo | URL, options?: RequestInit, optionsType?: OptionsType) : Promise<[ data: T | null, error: any]> => {
+  const accessToken = useUserStore.getState().token
 
-  const finalOptionsType: OptionsType = optionsType || { 
+  const finalOptionsType: { cache: boolean, time: number } = { 
     cache: false, 
-    time: 180000, // 5 minutes
+    time: 180000,
+    ...optionsType
   }
 
   const cacheKey = typeof url === 'string' ? url : url.toString();
@@ -37,18 +38,17 @@ export const Fetch = async<T = any>(url: RequestInfo | URL, options?: RequestIni
       }
     }
 
-    const response = await fetch(url, {
+    const response = await fetch(import.meta.env.VITE_ENDPOINT + url, {
       ...options,
       headers: {
         'Content-Type': 'application/json',
         ...options?.headers,
-        "X-CSRF-Token": csrf,
-        // 'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${accessToken}`
       }
     })
 
     if (!response.ok) {
-      throw response
+      throw await response.json()
     }
 
     if (finalOptionsType.cache) {
@@ -60,10 +60,10 @@ export const Fetch = async<T = any>(url: RequestInfo | URL, options?: RequestIni
 
     data = await response.json()
     
-    return data as T
+    return [ data as T, null ]
   } catch (error) {
     console.error('Error fetching data:', error)
-    return null
+    return [ null, error ]
   }
 }
 
@@ -74,15 +74,14 @@ export const useFetch = (url: RequestInfo | URL, options?: RequestInit) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        if (loading) return
-        setLoading(true)
-        const data = await Fetch(url, options)
-        setData(data)
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
+      if (loading) return
+      setLoading(true)
+
+      const [data, error] = await Fetch(url, options)
+
+      setData(data)
+      setError(error);
+      setLoading(false);
     };
 
     fetchData();

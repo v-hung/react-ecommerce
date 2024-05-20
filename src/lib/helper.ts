@@ -1,5 +1,9 @@
+import { User } from "../stores/user";
+
+const numberFormat = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+
 export const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
+  return numberFormat.format(price)
 }
 
 export const debounce = (callback: Function, wait: number) => {
@@ -15,3 +19,11 @@ export const debounce = (callback: Function, wait: number) => {
     }, wait);
   };
 };
+
+export const getUserImage = (user: User | null) => {
+  return import.meta.env.VITE_ENDPOINT + (user?.image ?? "/admin-assets/imgs/user.png")
+}
+
+export const getImage = (img?: string | null) => {
+  return import.meta.env.VITE_ENDPOINT + img;
+}
